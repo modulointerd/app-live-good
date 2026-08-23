@@ -1,8 +1,8 @@
 import React from 'react';
-import { ArrowRight, ShieldCheck, HeartPulse, Download, ExternalLink, Play } from 'lucide-react';
+import { HeartPulse, Download, ExternalLink } from 'lucide-react';
 
 interface ProductsProps {
-  onRegisterClick: () => void;
+  onRegisterClick?: () => void;
 }
 
 const STORE_URL = 'https://www.LiveGood.com/JILSZO';
@@ -11,7 +11,7 @@ const PRODUCT_VIDEO_URL = 'https://www.youtube-nocookie.com/embed/l4lycwQRqmE?au
 const WHATSAPP_URL = 'https://wa.me/51900292484?text=Hola%20Johnny%2C%20quiero%20informaci%C3%B3n%20sobre%20LiveGood%20y%20tu%20equipo.';
 const PRE_REGISTRATION_URL = 'https://livegoodtour.com/JILSZO';
 
-export const ProductsSection: React.FC<ProductsProps> = ({ onRegisterClick }) => {
+export const ProductsSection: React.FC<ProductsProps> = () => {
   return (
     <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
 
