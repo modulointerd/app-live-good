@@ -46,7 +46,7 @@ export const WhatsAppWidget: React.FC<WhatsAppWidgetProps> = ({ onContactJohnny 
           {/* Chat Messages */}
           <div className="p-4 space-y-3 bg-slate-50/60 max-h-64 overflow-y-auto text-xs">
             <div className="bg-white p-3 rounded-2xl rounded-tl-none border border-slate-200/60 shadow-sm max-w-[95%] text-[#093725] font-medium leading-relaxed">
-              ¡Hola! Soy Jilszo, asesor de Johnny en LiveGood. 👋 ¿Buscas generar ingresos extras o las dos cosas? 💰✨
+              ¡Hola! Soy Johnny asesor de LIVE GOOD! 👋 ¿Buscas mejorar tu salud 🌱, generar ingresos extras 💰 o las dos cosas? ✨
             </div>
 
             <div className="bg-emerald-50 text-emerald-900 p-2.5 rounded-xl border border-emerald-100 text-[11px] font-semibold">
