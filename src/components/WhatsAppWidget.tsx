@@ -9,7 +9,7 @@ export const WhatsAppWidget: React.FC<WhatsAppWidgetProps> = ({ onContactJohnny 
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end pointer-events-auto">
+    <div className="fixed bottom-20 sm:bottom-6 right-4 sm:right-6 z-50 flex flex-col items-end pointer-events-auto">
       
       {/* Expanded Chat Box */}
       {isOpen && (

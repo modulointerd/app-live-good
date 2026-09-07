@@ -24,15 +24,8 @@ export function App() {
   };
 
   const handleRegisterClick = () => {
-    setActiveTab('inicio');
-    setTimeout(() => {
-      const el = document.getElementById('register-section');
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-      } else {
-        window.open(PRE_REGISTRATION_URL, '_blank');
-      }
-    }, 100);
+    setActiveTab('miembros');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -49,8 +42,8 @@ export function App() {
       {/* Navbar */}
       <Navbar onOpenCalculator={() => setIsCalculatorOpen(true)} />
 
-      {/* Main Content Area */}
-      <main className="flex-1">
+      {/* Main Content Area with padding-bottom for floating navigation */}
+      <main className="flex-1 pb-24 sm:pb-32">
         
         {/* Tab 1: INICIO (Matching Johnny Hero + Testimonials + Share Card) */}
         {activeTab === 'inicio' && (
@@ -226,8 +219,8 @@ export function App() {
 
       </main>
 
-      {/* Footer */}
-      <footer className="bg-[#06261a] text-slate-400 py-10 px-4 sm:px-6 lg:px-8 border-t border-emerald-950 mt-12">
+      {/* Footer with bottom padding so floating navigation never covers copyright/links */}
+      <footer className="bg-[#06261a] text-slate-400 py-10 pb-28 sm:pb-24 px-4 sm:px-6 lg:px-8 border-t border-emerald-950 mt-12">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-2 text-white font-extrabold text-xl">
             <span className="text-emerald-400">LIVE</span>GOOD
