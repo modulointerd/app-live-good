@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Star, Search, Quote } from 'lucide-react';
+import { Star, Search, Quote, ArrowRight } from 'lucide-react';
+
+const PRE_REGISTRATION_URL = 'https://livegoodtour.com/JILSZO';
 
 interface TestimonialItem {
   id: string;
@@ -7,6 +9,7 @@ interface TestimonialItem {
   rank: 'DIAMANTE' | 'PLATA' | 'BRONCE';
   rankClass: string;
   image: string;
+  before: string;
   quote: string;
   location: string;
   earnings: string;
@@ -19,6 +22,7 @@ const testimonialsData: TestimonialItem[] = [
     rank: 'DIAMANTE',
     rankClass: 'rank-diamante',
     image: '/images/pedro.png',
+    before: 'Cansado de trabajar 12 horas sin ver crecimiento real.',
     quote: 'Invertí $40 dólares. El primer mes recuperé la inversión. Hoy es mi ingreso principal y trabajo desde la comodidad de mi hogar o desde cualquier parte del mundo.',
     location: 'Bogotá, Colombia',
     earnings: '$4,200+/mes'
@@ -29,7 +33,8 @@ const testimonialsData: TestimonialItem[] = [
     rank: 'PLATA',
     rankClass: 'rank-plata',
     image: '/images/esther.png',
-    quote: 'Como médica, elegí LiveGood por su visión de salud integral. Hoy tengo un negocio internacional que me genera ingresos incluso mientras descanso.',
+    before: 'Escéptica de las redes tradicionales por los precios inflados.',
+    quote: 'Descubrí un modelo de salud integral con precios reales. Hoy tengo un negocio internacional que me genera ingresos incluso mientras descanso.',
     location: 'Ciudad de México, México',
     earnings: '$1,850+/mes'
   },
@@ -39,7 +44,8 @@ const testimonialsData: TestimonialItem[] = [
     rank: 'BRONCE',
     rankClass: 'rank-bronce',
     image: '/images/veronica.png',
-    quote: 'Lo que me convenció fue que los productos se venden solos. Mi familia los usa, mis vecinos los piden. No tuve que convencer a nadie.',
+    before: 'No quería vender nada por catálogo ni presionar a mi familia.',
+    quote: 'Ahorro $100/mes en mis suplementos y genero un ingreso constante. Los productos se recomiendan solos, no tuve que convencer a nadie.',
     location: 'Santiago, Chile',
     earnings: '$950+/mes'
   }
@@ -51,15 +57,15 @@ export const Testimonials: React.FC = () => {
   return (
     <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       
-      {/* Section Header matching screenshot */}
+      {/* Section Header — Maleta 4: Prueba Social */}
       <div className="text-center space-y-3 mb-12">
         <div className="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200/80 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold shadow-sm">
           <Star className="w-4 h-4 text-emerald-600 fill-emerald-600" />
-          <span>No se inventó. Se vive.</span>
+          <span>Historias reales de transformación</span>
         </div>
         
         <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#093725] max-w-2xl mx-auto leading-tight">
-          Personas con empleos, familias y tiempo limitado que construyeron un <span className="text-[#0fa968]">ingreso extra real</span>
+          Consumidores inteligentes que construyeron un <span className="text-[#0fa968]">ingreso extra real</span>
         </h2>
       </div>
 
@@ -96,6 +102,11 @@ export const Testimonials: React.FC = () => {
                     {item.rank}
                   </span>
                 </div>
+
+                {/* Before state — Transformation narrative */}
+                <p className="text-[11px] text-red-500/80 font-semibold mb-2 leading-snug">
+                  Antes: {item.before}
+                </p>
 
                 <p className="card-quote">
                   "{item.quote}"
@@ -139,10 +150,17 @@ export const Testimonials: React.FC = () => {
               </div>
             </div>
 
+            {/* Before state highlight */}
+            <div className="bg-red-50/60 rounded-xl p-3 border border-red-100 mb-3">
+              <p className="text-xs text-red-600 font-semibold">
+                ❌ Antes: {activeModal.before}
+              </p>
+            </div>
+
             <div className="bg-emerald-50/60 rounded-2xl p-4 border border-emerald-100 mb-6">
               <Quote className="w-6 h-6 text-emerald-600 mb-2 opacity-50" />
               <p className="text-sm text-[#093725] font-medium leading-relaxed italic">
-                "{activeModal.quote}"
+                ✅ "{activeModal.quote}"
               </p>
             </div>
 
@@ -161,16 +179,16 @@ export const Testimonials: React.FC = () => {
               </div>
             </div>
 
-            <button
-              onClick={() => {
-                setActiveModal(null);
-                const el = document.getElementById('register-section');
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="w-full btn-primary-emerald text-center"
+            {/* Unified CTA */}
+            <a
+              href={PRE_REGISTRATION_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full btn-primary-emerald text-center justify-center"
             >
-              QUIERO ESTOS RESULTADOS
-            </button>
+              <ArrowRight className="w-5 h-5" />
+              ASEGURAR MI POSICIÓN AHORA
+            </a>
           </div>
         </div>
       )}

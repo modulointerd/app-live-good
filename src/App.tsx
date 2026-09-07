@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Zap, Sparkles, ArrowRight } from 'lucide-react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Testimonials } from './components/Testimonials';
@@ -17,22 +18,34 @@ export function App() {
 
   const handleContactJohnny = () => {
     const whatsappUrl = `https://wa.me/51900292484?text=${encodeURIComponent(
-      'Hola Johnny, vi tu página LiveGoodTour.com/JILSZO y quiero información sobre la inversión de $40 USD y cómo unirme a tu equipo.'
+      'Hola Johnny, vi tu página LiveGoodTour.com/JILSZO y quiero información sobre la membresía de $40 USD y cómo unirme a tu equipo.'
     )}`;
     window.open(whatsappUrl, '_blank');
   };
 
   const handleRegisterClick = () => {
-    setActiveTab('miembros');
+    setActiveTab('inicio');
     setTimeout(() => {
       const el = document.getElementById('register-section');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        window.open(PRE_REGISTRATION_URL, '_blank');
+      }
     }, 100);
   };
 
   return (
     <div className="min-h-screen flex flex-col bg-[#f8faf9] text-[#121e19]">
       
+      {/* Urgency Banner — Maleta 5: Escasez y Urgencia */}
+      <div className="urgency-banner">
+        <Zap className="w-3.5 h-3.5 text-amber-400 animate-pulse flex-shrink-0" />
+        <span>
+          ⚡ <strong>Próximo corte de posición en la matriz:</strong> asegura tu lugar hoy antes de la actualización semanal.
+        </span>
+      </div>
+
       {/* Navbar */}
       <Navbar onOpenCalculator={() => setIsCalculatorOpen(true)} />
 
@@ -45,8 +58,8 @@ export function App() {
             
             {/* Hero Section with Johnny */}
             <Hero
-              onOpenCalculator={() => setIsCalculatorOpen(true)}
               onContactJohnny={handleContactJohnny}
+              onRegisterClick={handleRegisterClick}
             />
 
             {/* Testimonials Section */}
@@ -73,13 +86,13 @@ export function App() {
             {/* Questions FAQ Section with YouTube Video Accordions */}
             <FaqSection onRegisterClick={handleRegisterClick} />
 
-            {/* Fast Registration Form */}
+            {/* Fast Registration Form (Anchor: #register-section) */}
             <MembersSection onContactJohnny={handleContactJohnny} />
 
           </div>
         )}
 
-        {/* Tab 2: INGRESOS (Dedicated income overview with your profile) */}
+        {/* Tab 2: INGRESOS (Dedicated income overview with profile) */}
         {activeTab === 'ingresos' && (
           <div className="animate-fade-in pt-6">
             <section className="py-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -95,7 +108,7 @@ export function App() {
                       Ingresos proyectados con LiveGood
                     </h2>
                     <p className="max-w-2xl text-[#4a5d53] text-base sm:text-lg leading-relaxed">
-                      Esta sección muestra un modelo de crecimiento real basado en tu perfil. Aquí no se repite la misma información que en Inicio: es un plan de acción claro con cifras de ingresos y ancho de equipo.
+                      Esta sección muestra un modelo de crecimiento real basado en tu membresía inteligente. Un plan de acción claro con cifras reales de ahorro y ganancias sin autoconsumos forzados.
                     </p>
                   </div>
 
@@ -103,12 +116,12 @@ export function App() {
                     <div className="rounded-3xl bg-white border border-emerald-100 p-5 shadow-sm">
                       <p className="text-xs uppercase tracking-[0.24em] text-emerald-500 font-bold mb-3">Tus Directos al mes</p>
                       <p className="text-3xl font-black text-[#093725]">4</p>
-                      <p className="text-sm text-[#5e7368] mt-2">Personas nuevas que invitas personalmente cada mes.</p>
+                      <p className="text-sm text-[#5e7368] mt-2">Nuevos miembros que incorporas personalmente cada mes.</p>
                     </div>
                     <div className="rounded-3xl bg-white border border-emerald-100 p-5 shadow-sm">
                       <p className="text-xs uppercase tracking-[0.24em] text-emerald-500 font-bold mb-3">Duplicación del Equipo</p>
                       <p className="text-3xl font-black text-[#093725]">2</p>
-                      <p className="text-sm text-[#5e7368] mt-2">Promedio de personas nuevas que cada miembro de tu equipo incorpora.</p>
+                      <p className="text-sm text-[#5e7368] mt-2">Promedio de personas que cada miembro de tu equipo incorpora.</p>
                     </div>
                     <div className="rounded-3xl bg-white border border-emerald-100 p-5 shadow-sm">
                       <p className="text-xs uppercase tracking-[0.24em] text-emerald-500 font-bold mb-3">Meses acumulados</p>
@@ -125,30 +138,29 @@ export function App() {
                   <div className="bg-white rounded-3xl border border-emerald-100 p-6 shadow-sm">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                       <div>
-                        <p className="text-sm uppercase tracking-[0.24em] text-emerald-500 font-bold">Ingreso Mensual</p>
+                        <p className="text-sm uppercase tracking-[0.24em] text-emerald-500 font-bold">Ingreso Mensual Estimado</p>
                         <p className="text-5xl sm:text-6xl font-black text-[#093725] mt-3">$115</p>
-                        <p className="text-sm text-[#5e7368] mt-2">Equivalente a COP 480,900</p>
+                        <p className="text-sm text-[#5e7368] mt-2">Equivalente a COP 480,900 aprox.</p>
                       </div>
                       <div className="rounded-3xl bg-emerald-50 border border-emerald-100 px-5 py-4 text-center">
-                        <p className="text-xs uppercase tracking-[0.24em] text-emerald-600 font-bold">Modelo de ingreso</p>
+                        <p className="text-xs uppercase tracking-[0.24em] text-emerald-600 font-bold">Modelo de membresía</p>
                         <p className="text-base text-[#093725] font-semibold mt-2">Matriz + bonos + duplicación</p>
                       </div>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <button
-                      onClick={() => window.open(PRE_REGISTRATION_URL, '_blank')}
-                      className="btn-primary-emerald text-sm py-4"
+                  {/* Unified CTA */}
+                  <div className="pt-2">
+                    <a
+                      href={PRE_REGISTRATION_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-primary-emerald btn-primary-pulse text-sm py-4 w-full flex items-center justify-center gap-2"
                     >
-                      PRE-REGISTRAR GRATIS
-                    </button>
-                    <button
-                      onClick={() => window.open(PRE_REGISTRATION_URL, '_blank')}
-                      className="btn-outline-whatsapp text-sm py-4"
-                    >
-                      VER MI PLAN DE ACCIÓN
-                    </button>
+                      <Sparkles className="w-4 h-4" />
+                      <span>ASEGURAR MI POSICIÓN AHORA</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </a>
                   </div>
                 </div>
 
@@ -158,7 +170,7 @@ export function App() {
                     <div className="grid gap-4">
                       <div className="rounded-[2rem] bg-white overflow-hidden border border-emerald-100 shadow-lg">
                         <div className="p-5 border-b border-emerald-100">
-                          <p className="text-xs uppercase tracking-[0.24em] text-emerald-500 font-bold">¿De dónde sale este dinero?</p>
+                          <p className="text-xs uppercase tracking-[0.24em] text-emerald-500 font-bold">¿Cómo funciona el modelo?</p>
                         </div>
                         <div className="relative aspect-video bg-black">
                           <iframe
@@ -177,9 +189,9 @@ export function App() {
                             <img src="/images/johnny.png" alt="Johnny" className="w-full h-full object-cover" />
                           </div>
                           <div>
-                            <p className="text-xs uppercase tracking-[0.24em] text-emerald-600 font-bold">Líder de Equipo</p>
+                            <p className="text-xs uppercase tracking-[0.24em] text-emerald-600 font-bold">Líder y Mentor de Equipo</p>
                             <h3 className="text-3xl font-black text-[#093725]">Johnny</h3>
-                            <p className="text-sm text-[#5e7368] mt-1">Líder de Equipo LiveGood</p>
+                            <p className="text-sm text-[#5e7368] mt-1">Acompañamiento directo en tu crecimiento</p>
                           </div>
                         </div>
                       </div>
@@ -187,7 +199,7 @@ export function App() {
                       <div className="rounded-3xl bg-[#ecfdf5] border border-emerald-100 p-5 text-[#093725]">
                         <p className="text-xs uppercase tracking-[0.24em] text-emerald-600 font-bold">Acción clave</p>
                         <p className="mt-3 text-sm leading-relaxed">
-                          Enfócate en invitar personas reales cada mes, duplicar el equipo y acompañarlas para que activen sus órdenes con consistencia.
+                          Asegura tu posición en la matriz, accede a las capacitaciones del equipo y aprovecha los productos a precio de fábrica para ti y tu familia.
                         </p>
                       </div>
                     </div>
@@ -205,7 +217,7 @@ export function App() {
           </div>
         )}
 
-        {/* Tab 4: MIEMBROS */}
+        {/* Tab 4: MIEMBROS (Fallback / Deep Link) */}
         {activeTab === 'miembros' && (
           <div className="animate-fade-in pt-4">
             <MembersSection onContactJohnny={handleContactJohnny} />
@@ -224,12 +236,12 @@ export function App() {
 
           <div className="text-xs text-center md:text-right text-slate-400 space-y-1">
             <p>© {new Date().getFullYear()} Johnnylivegood.com - Todos los derechos reservados.</p>
-            <p className="text-slate-500">Sitio oficial de equipo y soporte directo por WhatsApp.</p>
+            <p className="text-slate-500">Membresía Inteligente a Precio de Fábrica · Soporte directo por WhatsApp.</p>
           </div>
         </div>
       </footer>
 
-      {/* Floating Bottom Navigation Bar matching screenshot */}
+      {/* Floating Bottom Navigation Bar */}
       <BottomNav
         activeTab={activeTab}
         onTabChange={(tab) => {
@@ -245,7 +257,7 @@ export function App() {
         onRegisterClick={handleRegisterClick}
       />
 
-      {/* Floating WhatsApp Widget matching bottom right screenshot */}
+      {/* Floating WhatsApp Widget */}
       <WhatsAppWidget onContactJohnny={handleContactJohnny} />
 
     </div>

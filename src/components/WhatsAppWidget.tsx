@@ -71,11 +71,11 @@ export const WhatsAppWidget: React.FC<WhatsAppWidgetProps> = ({ onContactJohnny 
         </div>
       )}
 
-      {/* Floating Circle Button */}
+      {/* Floating Circle Button (secondary doubts channel) */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="relative group w-14 h-14 rounded-full bg-white p-0.5 shadow-[0_8px_25px_rgba(0,0,0,0.18)] border-2 border-emerald-500 hover:scale-105 transition-all duration-300 flex items-center justify-center"
-        aria-label="Contactar a Johnny"
+        className="relative group w-12 h-12 rounded-full bg-white p-0.5 shadow-[0_6px_20px_rgba(0,0,0,0.15)] border-2 border-emerald-500 hover:scale-105 transition-all duration-300 flex items-center justify-center opacity-90 hover:opacity-100"
+        aria-label="Contactar a Johnny por dudas"
       >
         <img
           src="/images/johnny.png"

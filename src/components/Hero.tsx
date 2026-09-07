@@ -1,12 +1,14 @@
 import React from 'react';
-import { DollarSign, MessageCircle, CheckCircle2, TrendingUp, Sparkles } from 'lucide-react';
+import { Shield, MessageCircle, CheckCircle2, Sparkles, ArrowRight } from 'lucide-react';
 
 interface HeroProps {
-  onOpenCalculator: () => void;
   onContactJohnny: () => void;
+  onRegisterClick?: () => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ onOpenCalculator, onContactJohnny }) => {
+const PRE_REGISTRATION_URL = 'https://livegoodtour.com/JILSZO';
+
+export const Hero: React.FC<HeroProps> = ({ onContactJohnny }) => {
   return (
     <section className="relative pt-6 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden">
       
@@ -25,52 +27,71 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCalculator, onContactJohnny })
             <span>+2 MILLONES DE MIEMBROS ACTIVOS</span>
           </div>
 
-          {/* Main Headline */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#093725] tracking-tight leading-[1.1] font-sans">
-            El negocio que no <br />
-            te pide que <span className="text-[#0fa968] relative inline-block">
-              vendas
+          {/* Main Headline — Maleta 1: Claridad */}
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#093725] tracking-tight leading-[1.15] font-sans">
+            El modelo de membresía que te permite generar{' '}
+            <span className="text-[#0fa968] relative inline-block">
+              ingresos recurrentes
               <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#0fa968]/30" viewBox="0 0 100 20" preserveAspectRatio="none">
                 <path d="M0,15 Q50,0 100,15" fill="none" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
               </svg>
-            </span>
+            </span>{' '}
+            con productos a precio de costo.
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg sm:text-xl text-[#4a5d53] font-medium max-w-xl leading-relaxed">
-            Más de 2 millones de personas ya ganan dinero <strong className="text-[#093725] font-bold">sin salir de casa.</strong>
+          <p className="text-base sm:text-lg text-[#4a5d53] font-medium max-w-xl leading-relaxed">
+            Únete a más de 2 millones de miembros que <strong className="text-[#093725] font-bold">ahorran en salud y construyen un ingreso extra desde casa.</strong> Sin compras mensuales obligatorias.
           </p>
 
-          {/* Comisiones Reales Pill Badge */}
+          {/* Mechanism Badge — Maleta 6: Identidad */}
           <div className="pt-1">
             <span className="badge-comisiones flex items-center gap-1.5 shadow-sm">
-              <TrendingUp className="w-4 h-4 text-emerald-600" />
-              Comisiones reales
+              <Shield className="w-4 h-4 text-emerald-600" />
+              Membresía Inteligente · Estilo Costco
             </span>
           </div>
 
-          {/* CTA Button matching screenshot */}
+          {/* CTA Button — Unified Primary CTA */}
           <div className="pt-2">
-            <button
-              onClick={onOpenCalculator}
-              className="btn-primary-emerald group"
+            <a
+              href={PRE_REGISTRATION_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary-emerald btn-primary-pulse group"
             >
               <span className="bg-white/20 p-1 rounded-full group-hover:rotate-12 transition-transform">
-                <DollarSign className="w-5 h-5 text-white" />
+                <ArrowRight className="w-5 h-5 text-white" />
               </span>
-              <span>CALCULAR MIS INGRESOS</span>
-            </button>
+              <span>ASEGURAR MI POSICIÓN AHORA</span>
+            </a>
+          </div>
+
+          {/* Certainty Microcopy — Maleta 3 */}
+          <div className="certainty-badges">
+            <span className="certainty-badge">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+              Sin contratos de permanencia
+            </span>
+            <span className="certainty-badge">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+              Transparencia total en pagos
+            </span>
+            <span className="certainty-badge">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+              Soporte directo por WhatsApp
+            </span>
           </div>
 
           {/* Social Proof Quick Stats */}
-          <div className="pt-4 flex items-center gap-6 text-xs sm:text-sm font-semibold text-[#5e7368]">
+          <div className="pt-2 flex items-center gap-6 text-xs sm:text-sm font-semibold text-[#5e7368]">
             <div className="flex items-center gap-1.5">
               <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-              <span>Inversión única de $40</span>
+              <span>Inversión única de $40 USD</span>
             </div>
             <div className="flex items-center gap-1.5">
               <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-              <span>Sin compras mensuales obligatorias</span>
+              <span>190+ países disponibles</span>
             </div>
           </div>
         </div>
@@ -106,7 +127,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCalculator, onContactJohnny })
                 
                 <div className="mt-1 inline-flex items-center gap-1.5 bg-emerald-50 text-[#0fa968] text-[11px] font-extrabold px-2.5 py-1 rounded-md uppercase tracking-wider border border-emerald-200/60">
                   <Sparkles className="w-3 h-3 text-emerald-600" />
-                  <span>LÍDER DE EQUIPO - LIVEGOOD</span>
+                  <span>TU MENTOR · LIVEGOOD</span>
                 </div>
               </div>
             </div>
@@ -118,24 +139,32 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCalculator, onContactJohnny })
               </p>
             </div>
 
-            {/* Link preview info badge */}
-            <div className="mt-3 text-[11px] text-[#5e7368] flex items-center justify-between font-semibold px-1">
-              <span>Sitio Oficial:</span>
-              <span className="text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">
-                Johnnylivegood.com
-              </span>
+            {/* Team Support Bullets — Maleta 3: Certeza */}
+            <div className="mt-4 space-y-2">
+              <div className="flex items-center gap-2 text-xs text-[#3a4d43] font-semibold">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />
+                <span>Capacitaciones semanales en vivo</span>
+              </div>
+              <div className="flex items-center gap-2 text-xs text-[#3a4d43] font-semibold">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />
+                <span>Embudos de captación listos para usar</span>
+              </div>
+              <div className="flex items-center gap-2 text-xs text-[#3a4d43] font-semibold">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />
+                <span>Acompañamiento paso a paso personalizado</span>
+              </div>
             </div>
 
             {/* Glowing Accent Bar */}
             <div className="w-full h-1 bg-gradient-to-r from-transparent via-emerald-400 to-transparent my-4 opacity-60"></div>
 
-            {/* WhatsApp CTA Button */}
+            {/* WhatsApp CTA Button — Secondary */}
             <button
               onClick={onContactJohnny}
               className="btn-outline-whatsapp group"
             >
               <MessageCircle className="w-5 h-5 text-emerald-600 group-hover:scale-110 transition-transform" />
-              <span>ESCRIBIR A JOHNNY (+51 900292484)</span>
+              <span>RESOLVER MIS DUDAS POR WHATSAPP</span>
             </button>
 
           </div>

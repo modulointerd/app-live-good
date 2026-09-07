@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import confetti from 'canvas-confetti';
 import { DollarSign, TrendingUp, Sparkles, Award } from 'lucide-react';
 
+const PRE_REGISTRATION_URL = 'https://livegoodtour.com/JILSZO';
+
 interface IncomeCalculatorProps {
   isOpen: boolean;
   onClose: () => void;
-  onRegisterClick: () => void;
+  onRegisterClick?: () => void;
 }
 
 export const IncomeCalculatorModal: React.FC<IncomeCalculatorProps> = ({
@@ -171,18 +173,22 @@ export const IncomeCalculatorModal: React.FC<IncomeCalculatorProps> = ({
 
         {/* CTA */}
         <div className="space-y-3">
-          <button
+          <a
+            href={PRE_REGISTRATION_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={() => {
               onClose();
-              onRegisterClick();
+              if (onRegisterClick) onRegisterClick();
             }}
-            className="w-full btn-primary-emerald py-4 text-center justify-center font-extrabold text-base"
+            className="w-full btn-primary-emerald btn-primary-pulse py-4 text-center justify-center font-extrabold text-base flex items-center gap-2"
           >
-            <span>RESERVAR MI POSICIÓN EN LA MATRIZ CON $40</span>
-          </button>
+            <Sparkles className="w-5 h-5 text-white" />
+            <span>ASEGURAR MI POSICIÓN AHORA</span>
+          </a>
           
           <p className="text-center text-xs text-slate-400">
-            🔒 Inclusión oficial en la línea directa de Johnny
+            🔒 Registro oficial en la línea directa de Johnny · Sin permanencia
           </p>
         </div>
 

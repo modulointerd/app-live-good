@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown, Play, ExternalLink, Sparkles, CheckCircle2 } from 'lucide-react';
+import { ChevronDown, Sparkles, CheckCircle2, ArrowRight, X } from 'lucide-react';
 
 interface FaqItem {
   id: number;
@@ -9,51 +9,54 @@ interface FaqItem {
   youtubeId: string;
   youtubeUrl: string;
   summary: string;
+  type: 'video' | 'comparison';
 }
 
 const faqData: FaqItem[] = [
   {
     id: 1,
     number: '01',
-    question: '¿Cómo se invierte?',
-    subtitle: '¿Cuánto se puede ganar?',
-    youtubeId: 'VN0CnAlx58E',
-    youtubeUrl: 'https://youtu.be/VN0CnAlx58E',
-    summary: 'Descubre en este video explicativo exactamente cómo funciona la inversión única de $40 USD, el sistema de comisiones semanales y la proyección de ingresos residuales en el equipo de Johnny.'
-  },
-  {
-    id: 2,
-    number: '02',
-    question: '¿LiveGood es una pirámide?',
-    subtitle: 'La diferencia en 2 minutos',
-    youtubeId: '5HKZuiVE1OM',
-    youtubeUrl: 'https://youtu.be/5HKZuiVE1OM',
-    summary: 'Entiende en 2 minutos por qué LiveGood es un modelo legal de comercio electrónico por membresía (estilo Costco o Amazon Prime) sin compras mensuales obligatorias ni requisitos de venta forzada.'
-  },
-  {
-    id: 3,
-    number: '03',
     question: '¿Qué es LiveGood?',
     subtitle: 'El modelo que está cambiando todo',
     youtubeId: 'pEtNx97EAaY',
     youtubeUrl: 'https://youtu.be/pEtNx97EAaY',
-    summary: 'Conoce la visión global de la compañía, cómo ofrece suplementos orgánicos de máxima calidad a precio de costo y cómo está revolucionando la industria internacional.'
+    summary: 'Conoce la visión global de la compañía: suplementos orgánicos de máxima calidad a precio de costo, sin intermediarios. Más de 2 millones de consumidores inteligentes ya son parte.',
+    type: 'video'
+  },
+  {
+    id: 2,
+    number: '02',
+    question: '¿Cuál es la diferencia con las redes tradicionales?',
+    subtitle: 'Membresía inteligente vs. modelo antiguo',
+    youtubeId: '5HKZuiVE1OM',
+    youtubeUrl: 'https://youtu.be/5HKZuiVE1OM',
+    summary: 'LiveGood funciona como una membresía inteligente estilo Costco o Amazon Prime: precios de fábrica, consumo 100% opcional y ganancias por suscripción.',
+    type: 'comparison'
+  },
+  {
+    id: 3,
+    number: '03',
+    question: '¿Cómo se invierte y cuánto puedo generar?',
+    subtitle: 'Inversión única de $40 USD',
+    youtubeId: 'VN0CnAlx58E',
+    youtubeUrl: 'https://youtu.be/VN0CnAlx58E',
+    summary: 'Descubre cómo funciona la inversión única de $40 USD, el sistema de comisiones semanales y la proyección de ingresos residuales en el equipo de Johnny.',
+    type: 'video'
   }
 ];
+
+const PRE_REGISTRATION_URL = 'https://livegoodtour.com/JILSZO';
 
 interface FaqSectionProps {
   onRegisterClick?: () => void;
 }
 
-export const FaqSection: React.FC<FaqSectionProps> = ({ onRegisterClick }) => {
-  // Open the first item by default or null
+export const FaqSection: React.FC<FaqSectionProps> = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggleAccordion = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
-
-  const mainAffiliateUrl = "https://livegoodtour.com/JILSZO";
 
   return (
     <section className="py-14 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -62,11 +65,11 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onRegisterClick }) => {
         {/* Ambient Glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
-        {/* Section Header matching Image 1 */}
+        {/* Section Header */}
         <div className="text-center space-y-3 mb-10 relative z-10">
           <div className="inline-flex items-center gap-1.5 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
             <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
-            <span>ANTES DE DECIDIR</span>
+            <span>PARA CONSUMIDORES INTELIGENTES</span>
           </div>
 
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight">
@@ -127,11 +130,53 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onRegisterClick }) => {
                   </div>
                 </button>
 
-                {/* Accordion Body: Video Player & Info */}
+                {/* Accordion Body */}
                 {isOpen && (
                   <div className="px-4 pb-6 sm:px-6 sm:pb-8 pt-2 border-t border-emerald-800/40 animate-fade-in space-y-5">
                     
-                    {/* Responsive YouTube Video Player (iframe) */}
+                    {/* Comparison Table for FAQ #2 — Maleta 2: Contraste */}
+                    {item.type === 'comparison' && (
+                      <div className="rounded-2xl overflow-hidden border border-emerald-500/20 mb-4">
+                        <table className="comparison-table">
+                          <thead>
+                            <tr>
+                              <th>
+                                <div className="flex items-center gap-2">
+                                  <X className="w-4 h-4" />
+                                  Redes Tradicionales
+                                </div>
+                              </th>
+                              <th>
+                                <div className="flex items-center gap-2">
+                                  <CheckCircle2 className="w-4 h-4" />
+                                  Membresía LiveGood
+                                </div>
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Precios inflados para pagar comisiones</td>
+                              <td>Precios de fábrica, hasta 75% menos</td>
+                            </tr>
+                            <tr>
+                              <td>Compras mensuales obligatorias</td>
+                              <td>Consumo 100% opcional</td>
+                            </tr>
+                            <tr>
+                              <td>Presión por vender a familiares</td>
+                              <td>Ganancias por suscripción, no por ventas</td>
+                            </tr>
+                            <tr>
+                              <td>Inventarios y pedidos mínimos</td>
+                              <td>Sin inventario, envío directo</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    )}
+
+                    {/* Responsive YouTube Video Player */}
                     <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl border border-emerald-500/30 bg-black">
                       <iframe
                         src={`https://www.youtube-nocookie.com/embed/${item.youtubeId}?autoplay=1&rel=0`}
@@ -150,25 +195,17 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onRegisterClick }) => {
                       </div>
                     </div>
 
-                    {/* CTA inside accordion with main link */}
-                    <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-1">
+                    {/* Single Unified CTA — Maleta 7: Simplicity */}
+                    <div className="flex items-center justify-center pt-1">
                       <a
-                        href={mainAffiliateUrl}
+                        href={PRE_REGISTRATION_URL}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full sm:w-auto btn-primary-emerald text-xs sm:text-sm py-3 px-6 justify-center"
+                        className="w-full sm:w-auto btn-primary-emerald text-xs sm:text-sm py-3 px-8 justify-center"
                       >
-                        <span>UNIRME AHORA EN JOHNNYLIVEGOOD.COM</span>
-                        <ExternalLink className="w-4 h-4" />
+                        <ArrowRight className="w-4 h-4" />
+                        <span>ASEGURAR MI POSICIÓN AHORA</span>
                       </a>
-
-                      <button
-                        onClick={onRegisterClick}
-                        className="w-full sm:w-auto bg-emerald-950 hover:bg-emerald-900 text-emerald-300 border border-emerald-500/40 px-5 py-3 rounded-full text-xs font-bold transition-colors flex items-center justify-center gap-2"
-                      >
-                        <Play className="w-3.5 h-3.5 text-emerald-400" />
-                        <span>RESERVAR MI POSICIÓN GRATIS</span>
-                      </button>
                     </div>
 
                   </div>
@@ -178,21 +215,21 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onRegisterClick }) => {
           })}
         </div>
 
-        {/* Link principal Banner at bottom of section */}
+        {/* Bottom Banner — Single CTA */}
         <div className="mt-10 max-w-4xl mx-auto bg-gradient-to-r from-emerald-900/60 via-emerald-800/40 to-emerald-900/60 p-4 rounded-2xl border border-emerald-500/30 text-center flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-left text-xs sm:text-sm font-semibold text-emerald-200">
             <span className="text-white font-extrabold block text-sm sm:text-base">¿Listo para dar el siguiente paso?</span>
-            Accede al enlace principal oficial: <span className="text-emerald-400 font-bold">LiveGoodTour.com/JILSZO</span>
+            Accede a tu posición como emprendedor moderno en LiveGood.
           </div>
 
           <a
-            href={mainAffiliateUrl}
+            href={PRE_REGISTRATION_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-primary-emerald text-xs py-2.5 px-5 flex-shrink-0"
           >
-            <span>IR A LIVEGOODTOUR.COM/JILSZO</span>
-            <ExternalLink className="w-3.5 h-3.5" />
+            <ArrowRight className="w-3.5 h-3.5" />
+            <span>ASEGURAR MI POSICIÓN AHORA</span>
           </a>
         </div>
 
