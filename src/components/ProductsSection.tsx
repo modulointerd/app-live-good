@@ -8,7 +8,9 @@ interface ProductsProps {
 const STORE_URL = 'https://www.LiveGood.com/JILSZO';
 const CATALOG_URL = 'https://drive.google.com/file/d/1l1bezloTk1p5Ru1yUzJFtUU3lsBj6MUM/view?usp=sharing';
 const PRODUCT_VIDEO_URL = 'https://www.youtube-nocookie.com/embed/l4lycwQRqmE?autoplay=0&rel=0';
-const WHATSAPP_URL = 'https://wa.me/51900292484?text=Hola%20Johnny%2C%20quiero%20informaci%C3%B3n%20sobre%20LiveGood%20y%20tu%20equipo.';
+const WHATSAPP_URL = `https://wa.me/51900292484?text=${encodeURIComponent(
+  'Hola Johnny, acabo de ver tu página y me interesa saber cómo funciona el club de membresía y cómo puedo generar ingresos con tu equipo. ¿Me das más detalles?'
+)}`;
 const PRE_REGISTRATION_URL = 'https://livegoodtour.com/JILSZO';
 
 export const ProductsSection: React.FC<ProductsProps> = () => {

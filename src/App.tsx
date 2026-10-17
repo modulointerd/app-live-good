@@ -18,7 +18,7 @@ export function App() {
 
   const handleContactJohnny = () => {
     const whatsappUrl = `https://wa.me/51900292484?text=${encodeURIComponent(
-      'Hola Johnny, vi tu página LiveGoodTour.com/JILSZO y quiero información sobre la membresía de $40 USD y cómo unirme a tu equipo.'
+      'Hola Johnny, acabo de ver tu página y me interesa saber cómo funciona el club de membresía y cómo puedo generar ingresos con tu equipo. ¿Me das más detalles?'
     )}`;
     window.open(whatsappUrl, '_blank');
   };
