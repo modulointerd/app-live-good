@@ -125,6 +125,13 @@ export const Testimonials: React.FC = () => {
         ))}
       </div>
 
+      {/* Income Disclaimer banner to comply with Meta advertising guidelines */}
+      <div className="mt-8 p-4 rounded-2xl bg-slate-50 border border-slate-200 text-center max-w-3xl mx-auto">
+        <p className="text-[11px] text-[#5e7368] leading-relaxed">
+          * <strong>Aviso legal sobre testimonios e ingresos:</strong> Las experiencias compartidas corresponden a resultados individuales y no representan una garantía de ingresos. En el programa de afiliación de LiveGood, las ganancias dependen exclusivamente de las ventas generadas y del tiempo, habilidades y dedicación de cada persona.
+        </p>
+      </div>
+
       {/* Modal preview when clicking card */}
       {activeModal && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in">
@@ -178,6 +185,10 @@ export const Testimonials: React.FC = () => {
                 <strong className="text-emerald-600 font-extrabold">{activeModal.earnings}</strong>
               </div>
             </div>
+
+            <p className="text-[10px] text-slate-500 italic mb-4 text-center">
+              * Nota: Ejemplo ilustrativo de experiencia individual. No garantiza ingresos futuros.
+            </p>
 
             {/* Unified CTA */}
             <a

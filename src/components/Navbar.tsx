@@ -1,13 +1,15 @@
 import React from 'react';
-import { ShieldCheck, Sparkles } from 'lucide-react';
+import { ShieldCheck, Sparkles, FileText } from 'lucide-react';
+import { type LegalTab } from './LegalModal';
 
 const PRE_REGISTRATION_URL = 'https://livegoodtour.com/JILSZO';
 
 interface NavbarProps {
   onOpenCalculator?: () => void;
+  onOpenLegal?: (tab: LegalTab) => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = () => {
+export const Navbar: React.FC<NavbarProps> = ({ onOpenLegal }) => {
   return (
     <header className="w-full py-4 px-4 sm:px-8 bg-white/80 backdrop-blur-md sticky top-0 z-40 border-b border-emerald-900/5 transition-all">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -27,10 +29,20 @@ export const Navbar: React.FC<NavbarProps> = () => {
         </div>
 
         {/* Action Button & Live Status */}
-        <div className="flex items-center gap-3">
-          <div className="hidden md:flex items-center gap-2 text-xs font-bold text-emerald-800 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200">
+        <div className="flex items-center gap-2 sm:gap-3">
+          {onOpenLegal && (
+            <button
+              onClick={() => onOpenLegal('condiciones')}
+              className="hidden md:inline-flex items-center gap-1.5 text-xs font-bold text-[#093725] hover:text-emerald-700 bg-white/90 border border-emerald-200/80 hover:border-emerald-400 px-3 py-1.5 rounded-full transition-colors shadow-xs"
+            >
+              <FileText className="w-3.5 h-3.5 text-emerald-600" />
+              <span>Condiciones de Membresía</span>
+            </button>
+          )}
+
+          <div className="hidden lg:flex items-center gap-2 text-xs font-bold text-emerald-800 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200">
             <ShieldCheck className="w-4 h-4 text-emerald-600" />
-            <span>Sistema Verificado 2026</span>
+            <span>Información Verificada 2026</span>
           </div>
 
           <a

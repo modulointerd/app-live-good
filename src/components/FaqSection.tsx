@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import { ChevronDown, Sparkles, CheckCircle2, ArrowRight, X } from 'lucide-react';
+import { ChevronDown, Sparkles, CheckCircle2, ArrowRight, X, ShieldCheck } from 'lucide-react';
 
 interface FaqItem {
   id: number;
   number: string;
   question: string;
   subtitle: string;
-  youtubeId: string;
-  youtubeUrl: string;
+  youtubeId?: string;
+  youtubeUrl?: string;
   summary: string;
-  type: 'video' | 'comparison';
+  details?: string[];
+  type: 'video' | 'comparison' | 'info';
 }
 
 const faqData: FaqItem[] = [
@@ -17,31 +18,58 @@ const faqData: FaqItem[] = [
     id: 1,
     number: '01',
     question: '¿Qué es LiveGood?',
-    subtitle: 'El modelo que está cambiando todo',
+    subtitle: 'El modelo de membresía para productos de bienestar',
     youtubeId: 'pEtNx97EAaY',
     youtubeUrl: 'https://youtu.be/pEtNx97EAaY',
-    summary: 'Conoce la visión global de la compañía: suplementos orgánicos de máxima calidad a precio de costo, sin intermediarios. Más de 2 millones de consumidores inteligentes ya son parte.',
+    summary: 'LiveGood es un club de membresía enfocado en suplementos nutricionales y productos de bienestar de la más alta calidad a precios accesibles de fábrica, sin intermediarios. Más de 2 millones de miembros ya forman parte a nivel global.',
     type: 'video'
   },
   {
     id: 2,
     number: '02',
     question: '¿Cuál es la diferencia con las redes tradicionales?',
-    subtitle: 'Membresía inteligente vs. modelo antiguo',
+    subtitle: 'Membresía transparente vs. modelo antiguo',
     youtubeId: '5HKZuiVE1OM',
     youtubeUrl: 'https://youtu.be/5HKZuiVE1OM',
-    summary: 'LiveGood funciona como una membresía inteligente estilo Costco o Amazon Prime: precios de fábrica, consumo 100% opcional y ganancias por suscripción.',
+    summary: 'LiveGood opera con un modelo similar a Costco o Amazon Prime: compras productos solo si los deseas con descuento de fábrica, sin compras forzadas mensuales ni sobreprecios para pagar comisiones excesivas.',
     type: 'comparison'
   },
   {
     id: 3,
     number: '03',
-    question: '¿Cómo se invierte y cuánto puedo generar?',
-    subtitle: 'Inversión única de $40 USD',
+    question: '¿Cómo funciona el programa de afiliación y qué ingresos son posibles?',
+    subtitle: 'Tarifa única de $40 USD · Sin ingresos garantizados',
     youtubeId: 'VN0CnAlx58E',
     youtubeUrl: 'https://youtu.be/VN0CnAlx58E',
-    summary: 'Descubre cómo funciona la inversión única de $40 USD, el sistema de comisiones semanales y la proyección de ingresos residuales en el equipo de Johnny.',
+    summary: 'La afiliación es 100% opcional (cuota de activación de $40 USD). Permite a distribuidores independientes recomendar la membresía y productos a cambio de comisiones. Aviso importante: Los resultados e ingresos dependen del esfuerzo comercial, ventas y dedicación individual; no se garantizan ingresos fijos ni pasivos sin trabajo.',
     type: 'video'
+  },
+  {
+    id: 4,
+    number: '04',
+    question: '¿Cuáles son las cuotas recurrentes y qué otros costes existen?',
+    subtitle: 'Membresía de $9.95 USD/mes · Cero costos ocultos',
+    summary: 'La única cuota recurrente es la membresía mensual de $9.95 USD (o la opción anual de $99.95 USD). No hay pedidos mínimos obligatorios de productos ni recargos automáticos. Para productos físicos, aplican gastos de envío e impuestos locales desglosados con total claridad antes del pago.',
+    details: [
+      'Membresía mensual: $9.95 USD/mes para mantener acceso a precios de miembro.',
+      'Membresía anual (opcional): $99.95 USD/año (2 meses de ahorro).',
+      'Cuota de activación de afiliado (opcional): $40 USD pago único.',
+      'Sin autoenvíos obligatorios ni cuotas sorpresa de mantenimiento.'
+    ],
+    type: 'info'
+  },
+  {
+    id: 5,
+    number: '05',
+    question: '¿Cómo funcionan la cancelación y la garantía de devolución?',
+    subtitle: 'Cancelación libre sin penalizaciones · Garantía de 90 días',
+    summary: 'Puedes cancelar tu membresía mensual en cualquier momento directamente desde tu panel de usuario o comunicándote con soporte, sin contratos de permanencia ni penalizaciones. Además, LiveGood respalda sus productos físicos con una garantía de reembolso de 90 días en envases vacíos si no estás satisfecho.',
+    details: [
+      'Cancelación con 1 clic en la oficina virtual de LiveGood en cualquier momento.',
+      'Cero penalizaciones y cero compromisos de permanencia mínima.',
+      'Garantía "Empty Bottle" de 90 días: devolución del precio del producto aunque el frasco esté vacío (menos gastos de envío).'
+    ],
+    type: 'info'
   }
 ];
 
@@ -49,9 +77,10 @@ const PRE_REGISTRATION_URL = 'https://livegoodtour.com/JILSZO';
 
 interface FaqSectionProps {
   onRegisterClick?: () => void;
+  onOpenConditions?: () => void;
 }
 
-export const FaqSection: React.FC<FaqSectionProps> = () => {
+export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenConditions }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggleAccordion = (index: number) => {
@@ -69,19 +98,19 @@ export const FaqSection: React.FC<FaqSectionProps> = () => {
         <div className="text-center space-y-3 mb-10 relative z-10">
           <div className="inline-flex items-center gap-1.5 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
             <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
-            <span>PARA CONSUMIDORES INTELIGENTES</span>
+            <span>TRANSPARENCIA TOTAL</span>
           </div>
 
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight">
-            Todo lo que necesitas saber
+            Preguntas Frecuentes y Condiciones Claras
           </h2>
           
           <p className="text-xs sm:text-sm text-emerald-200/80 font-medium">
-            Tres preguntas. Tres respuestas honestas.
+            Costos, membresía, cancelación y oportunidad de afiliación explicados con honestidad.
           </p>
         </div>
 
-        {/* 3 Interactive Accordion Rows */}
+        {/* Interactive Accordion Rows */}
         <div className="space-y-4 max-w-4xl mx-auto relative z-10">
           {faqData.map((item, index) => {
             const isOpen = openIndex === index;
@@ -134,7 +163,7 @@ export const FaqSection: React.FC<FaqSectionProps> = () => {
                 {isOpen && (
                   <div className="px-4 pb-6 sm:px-6 sm:pb-8 pt-2 border-t border-emerald-800/40 animate-fade-in space-y-5">
                     
-                    {/* Comparison Table for FAQ #2 — Maleta 2: Contraste */}
+                    {/* Comparison Table for FAQ #2 */}
                     {item.type === 'comparison' && (
                       <div className="rounded-2xl overflow-hidden border border-emerald-500/20 mb-4">
                         <table className="comparison-table">
@@ -157,37 +186,39 @@ export const FaqSection: React.FC<FaqSectionProps> = () => {
                           <tbody>
                             <tr>
                               <td>Precios inflados para pagar comisiones</td>
-                              <td>Precios de fábrica, hasta 75% menos</td>
+                              <td>Precios directos de fábrica accesibles</td>
                             </tr>
                             <tr>
                               <td>Compras mensuales obligatorias</td>
-                              <td>Consumo 100% opcional</td>
+                              <td>Consumo 100% opcional sin obligación</td>
                             </tr>
                             <tr>
-                              <td>Presión por vender a familiares</td>
-                              <td>Ganancias por suscripción, no por ventas</td>
+                              <td>Presión para acumular inventarios</td>
+                              <td>Sin inventarios, la empresa despacha directo</td>
                             </tr>
                             <tr>
-                              <td>Inventarios y pedidos mínimos</td>
-                              <td>Sin inventario, envío directo</td>
+                              <td>Permanencia forzosa o penalizaciones</td>
+                              <td>Cancelación libre en cualquier momento</td>
                             </tr>
                           </tbody>
                         </table>
                       </div>
                     )}
 
-                    {/* Responsive YouTube Video Player */}
-                    <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl border border-emerald-500/30 bg-black">
-                      <iframe
-                        src={`https://www.youtube-nocookie.com/embed/${item.youtubeId}?autoplay=1&rel=0`}
-                        title={item.question}
-                        className="absolute top-0 left-0 w-full h-full border-0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowFullScreen
-                      ></iframe>
-                    </div>
+                    {/* Responsive YouTube Video Player (if present) */}
+                    {item.youtubeId && (
+                      <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl border border-emerald-500/30 bg-black">
+                        <iframe
+                          src={`https://www.youtube-nocookie.com/embed/${item.youtubeId}?autoplay=0&rel=0`}
+                          title={item.question}
+                          className="absolute top-0 left-0 w-full h-full border-0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          allowFullScreen
+                        ></iframe>
+                      </div>
+                    )}
 
-                    {/* Video Summary */}
+                    {/* Video / Info Summary */}
                     <div className="bg-[#052117] p-4 rounded-xl border border-emerald-900/50 flex items-start gap-3 text-xs sm:text-sm text-emerald-100/90 leading-relaxed font-medium">
                       <CheckCircle2 className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" />
                       <div>
@@ -195,17 +226,43 @@ export const FaqSection: React.FC<FaqSectionProps> = () => {
                       </div>
                     </div>
 
-                    {/* Single Unified CTA — Maleta 7: Simplicity */}
-                    <div className="flex items-center justify-center pt-1">
+                    {/* Detailed bullet points if info type */}
+                    {item.details && item.details.length > 0 && (
+                      <div className="bg-[#083525] p-4 rounded-xl border border-emerald-600/30 space-y-2">
+                        <div className="text-xs font-bold text-emerald-300 uppercase tracking-wider flex items-center gap-1.5">
+                          <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                          <span>Puntos clave:</span>
+                        </div>
+                        <ul className="space-y-1.5 text-xs text-emerald-100/80">
+                          {item.details.map((detail, dIdx) => (
+                            <li key={dIdx} className="flex items-start gap-2">
+                              <span className="text-emerald-400 font-bold">•</span>
+                              <span>{detail}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {/* CTAs */}
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
                       <a
                         href={PRE_REGISTRATION_URL}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full sm:w-auto btn-primary-emerald text-xs sm:text-sm py-3 px-8 justify-center"
+                        className="w-full sm:w-auto btn-primary-emerald text-xs sm:text-sm py-3 px-8 justify-center flex items-center gap-2"
                       >
                         <ArrowRight className="w-4 h-4" />
-                        <span>ASEGURAR MI POSICIÓN AHORA</span>
+                        <span>CONOCER MÁS / EVALUAR OPCIONES</span>
                       </a>
+                      {onOpenConditions && (
+                        <button
+                          onClick={onOpenConditions}
+                          className="w-full sm:w-auto text-xs text-emerald-300 hover:text-white font-bold py-2 px-4 underline"
+                        >
+                          Ver términos completos de membresía
+                        </button>
+                      )}
                     </div>
 
                   </div>
@@ -215,11 +272,11 @@ export const FaqSection: React.FC<FaqSectionProps> = () => {
           })}
         </div>
 
-        {/* Bottom Banner — Single CTA */}
-        <div className="mt-10 max-w-4xl mx-auto bg-gradient-to-r from-emerald-900/60 via-emerald-800/40 to-emerald-900/60 p-4 rounded-2xl border border-emerald-500/30 text-center flex flex-col sm:flex-row items-center justify-between gap-4">
+        {/* Bottom Banner */}
+        <div className="mt-10 max-w-4xl mx-auto bg-gradient-to-r from-emerald-900/60 via-emerald-800/40 to-emerald-900/60 p-5 rounded-2xl border border-emerald-500/30 text-center flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-left text-xs sm:text-sm font-semibold text-emerald-200">
-            <span className="text-white font-extrabold block text-sm sm:text-base">¿Listo para dar el siguiente paso?</span>
-            Accede a tu posición como emprendedor moderno en LiveGood.
+            <span className="text-white font-extrabold block text-sm sm:text-base">¿Deseas evaluar tus opciones con calma?</span>
+            Revisa el catálogo de bienestar y consulta cómo funciona la membresía sin compromiso.
           </div>
 
           <a
@@ -229,7 +286,7 @@ export const FaqSection: React.FC<FaqSectionProps> = () => {
             className="btn-primary-emerald text-xs py-2.5 px-5 flex-shrink-0"
           >
             <ArrowRight className="w-3.5 h-3.5" />
-            <span>ASEGURAR MI POSICIÓN AHORA</span>
+            <span>ACCEDER AL PORTAL OFICIAL</span>
           </a>
         </div>
 

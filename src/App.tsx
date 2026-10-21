@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Zap, Sparkles, ArrowRight } from 'lucide-react';
+import { Shield, Sparkles, ArrowRight } from 'lucide-react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Testimonials } from './components/Testimonials';
@@ -9,16 +9,25 @@ import { ProductsSection } from './components/ProductsSection';
 import { MembersSection } from './components/MembersSection';
 import { WhatsAppWidget } from './components/WhatsAppWidget';
 import { FaqSection } from './components/FaqSection';
+import { MembershipConditions } from './components/MembershipConditions';
+import { LegalModal, type LegalTab } from './components/LegalModal';
 
 const PRE_REGISTRATION_URL = 'https://livegoodtour.com/JILSZO';
 
 export function App() {
   const [activeTab, setActiveTab] = useState<TabType>('inicio');
   const [isCalculatorOpen, setIsCalculatorOpen] = useState(false);
+  const [isLegalModalOpen, setIsLegalModalOpen] = useState(false);
+  const [legalModalTab, setLegalModalTab] = useState<LegalTab>('condiciones');
+
+  const handleOpenLegal = (tab: LegalTab = 'condiciones') => {
+    setLegalModalTab(tab);
+    setIsLegalModalOpen(true);
+  };
 
   const handleContactJohnny = () => {
     const whatsappUrl = `https://wa.me/51900292484?text=${encodeURIComponent(
-      'Hola Johnny, acabo de ver tu página y me interesa saber cómo funciona el club de membresía y cómo puedo generar ingresos con tu equipo. ¿Me das más detalles?'
+      'Hola Johnny, acabo de ver tu página de LiveGood y me gustaría conocer más información sobre los productos y las condiciones de la membresía.'
     )}`;
     window.open(whatsappUrl, '_blank');
   };
@@ -31,31 +40,42 @@ export function App() {
   return (
     <div className="min-h-screen flex flex-col bg-[#f8faf9] text-[#121e19]">
       
-      {/* Urgency Banner — Maleta 5: Escasez y Urgencia */}
-      <div className="urgency-banner">
-        <Zap className="w-3.5 h-3.5 text-amber-400 animate-pulse flex-shrink-0" />
-        <span>
-          ⚡ <strong>Próximo corte de posición en la matriz:</strong> asegura tu lugar hoy antes de la actualización semanal.
+      {/* Top Transparency Banner */}
+      <div className="urgency-banner !bg-[#06261a] !border-emerald-800/60">
+        <Shield className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
+        <span className="text-emerald-100">
+          🌿 <strong>Transparencia Comercial:</strong> Consulta el catálogo de productos de bienestar, condiciones de membresía ($9.95/mes) y el programa de afiliación sin compras forzadas.
         </span>
       </div>
 
       {/* Navbar */}
-      <Navbar onOpenCalculator={() => setIsCalculatorOpen(true)} />
+      <Navbar
+        onOpenCalculator={() => setIsCalculatorOpen(true)}
+        onOpenLegal={handleOpenLegal}
+      />
 
       {/* Main Content Area with padding-bottom for floating navigation */}
       <main className="flex-1 pb-24 sm:pb-32">
         
-        {/* Tab 1: INICIO (Matching Johnny Hero + Testimonials + Share Card) */}
+        {/* Tab 1: INICIO (Neutral Hero + Membership Conditions + Testimonials + FAQs + Registration) */}
         {activeTab === 'inicio' && (
           <div className="animate-fade-in space-y-4">
             
-            {/* Hero Section with Johnny */}
+            {/* Hero Section with Johnny and Neutral Text */}
             <Hero
+              onContactJohnny={handleContactJohnny}
+              onRegisterClick={handleRegisterClick}
+              onOpenConditions={() => handleOpenLegal('condiciones')}
+            />
+
+            {/* Clear Membership Conditions & Transparency Section */}
+            <MembershipConditions
+              onOpenLegal={handleOpenLegal}
               onContactJohnny={handleContactJohnny}
               onRegisterClick={handleRegisterClick}
             />
 
-            {/* Testimonials Section */}
+            {/* Testimonials Section with Income Disclaimers */}
             <Testimonials />
 
             {/* Live Ticker Banner */}
@@ -63,21 +83,25 @@ export function App() {
               <div className="max-w-7xl mx-auto flex items-center justify-between text-xs font-semibold">
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                  <span className="text-emerald-300 font-extrabold">EN VIVO:</span>
-                  <span className="text-slate-200 hidden sm:inline">Nuevos miembros unidos en los últimos 60 minutos:</span>
-                  <span className="text-emerald-400 font-black">+148 personas</span>
+                  <span className="text-emerald-300 font-extrabold">COMUNIDAD GLOBAL:</span>
+                  <span className="text-slate-200 hidden sm:inline">Consumidores y afiliados activos en todo el mundo:</span>
+                  <span className="text-emerald-400 font-black">+2 Millones</span>
                 </div>
                 <div className="hidden md:flex items-center gap-4 text-slate-300 font-medium">
-                  <span>🇵🇪 Perú +34</span>
-                  <span>🇲🇽 México +28</span>
-                  <span>🇨🇴 Colombia +19</span>
-                  <span>🇨🇱 Chile +15</span>
+                  <span>🇵🇪 Perú</span>
+                  <span>🇲🇽 México</span>
+                  <span>🇨🇴 Colombia</span>
+                  <span>🇨🇱 Chile</span>
+                  <span>🇺🇸 EE.UU.</span>
                 </div>
               </div>
             </div>
 
-            {/* Questions FAQ Section with YouTube Video Accordions */}
-            <FaqSection onRegisterClick={handleRegisterClick} />
+            {/* Questions FAQ Section with YouTube Video Accordions & Membership FAQs */}
+            <FaqSection
+              onRegisterClick={handleRegisterClick}
+              onOpenConditions={() => handleOpenLegal('condiciones')}
+            />
 
             {/* Fast Registration Form (Anchor: #register-section) */}
             <MembersSection onContactJohnny={handleContactJohnny} />
@@ -85,7 +109,7 @@ export function App() {
           </div>
         )}
 
-        {/* Tab 2: INGRESOS (Dedicated income overview with profile) */}
+        {/* Tab 2: INGRESOS (Dedicated income overview with profile & disclaimers) */}
         {activeTab === 'ingresos' && (
           <div className="animate-fade-in pt-6">
             <section className="py-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -98,10 +122,10 @@ export function App() {
 
                   <div className="space-y-4">
                     <h2 className="text-4xl sm:text-5xl font-black text-[#093725] tracking-tight">
-                      Ingresos proyectados con LiveGood
+                      Modelo del Plan de Afiliación
                     </h2>
                     <p className="max-w-2xl text-[#4a5d53] text-base sm:text-lg leading-relaxed">
-                      Esta sección muestra un modelo de crecimiento real basado en tu membresía inteligente. Un plan de acción claro con cifras reales de ahorro y ganancias sin autoconsumos forzados.
+                      Esta sección ilustra el modelo de compensación oficial de LiveGood basado en la membresía. Conoce los bonos de inicio rápido, la matriz y el sistema de comisiones sin compras mensuales forzadas.
                     </p>
                   </div>
 
@@ -109,7 +133,7 @@ export function App() {
                     <div className="rounded-3xl bg-white border border-emerald-100 p-5 shadow-sm">
                       <p className="text-xs uppercase tracking-[0.24em] text-emerald-500 font-bold mb-3">Tus Directos al mes</p>
                       <p className="text-3xl font-black text-[#093725]">4</p>
-                      <p className="text-sm text-[#5e7368] mt-2">Nuevos miembros que incorporas personalmente cada mes.</p>
+                      <p className="text-sm text-[#5e7368] mt-2">Nuevos miembros que incorporas personalmente cada mes (ejemplo).</p>
                     </div>
                     <div className="rounded-3xl bg-white border border-emerald-100 p-5 shadow-sm">
                       <p className="text-xs uppercase tracking-[0.24em] text-emerald-500 font-bold mb-3">Duplicación del Equipo</p>
@@ -119,7 +143,7 @@ export function App() {
                     <div className="rounded-3xl bg-white border border-emerald-100 p-5 shadow-sm">
                       <p className="text-xs uppercase tracking-[0.24em] text-emerald-500 font-bold mb-3">Meses acumulados</p>
                       <p className="text-3xl font-black text-[#093725]">6</p>
-                      <p className="text-sm text-[#5e7368] mt-2">Tiempo de crecimiento continuo proyectado para tu red.</p>
+                      <p className="text-sm text-[#5e7368] mt-2">Tiempo de crecimiento continuo en la simulación.</p>
                     </div>
                     <div className="rounded-3xl bg-white border border-emerald-100 p-5 shadow-sm">
                       <p className="text-xs uppercase tracking-[0.24em] text-emerald-500 font-bold mb-3">Miembros estimados</p>
@@ -131,29 +155,38 @@ export function App() {
                   <div className="bg-white rounded-3xl border border-emerald-100 p-6 shadow-sm">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                       <div>
-                        <p className="text-sm uppercase tracking-[0.24em] text-emerald-500 font-bold">Ingreso Mensual Estimado</p>
+                        <p className="text-sm uppercase tracking-[0.24em] text-emerald-500 font-bold">Ingreso Mensual Ilustrativo</p>
                         <p className="text-5xl sm:text-6xl font-black text-[#093725] mt-3">$115</p>
-                        <p className="text-sm text-[#5e7368] mt-2">Equivalente a COP 480,900 aprox.</p>
+                        <p className="text-sm text-[#5e7368] mt-2">Equivalente a COP 480,900 aprox. (Ejemplo basado en volumen)</p>
                       </div>
                       <div className="rounded-3xl bg-emerald-50 border border-emerald-100 px-5 py-4 text-center">
                         <p className="text-xs uppercase tracking-[0.24em] text-emerald-600 font-bold">Modelo de membresía</p>
                         <p className="text-base text-[#093725] font-semibold mt-2">Matriz + bonos + duplicación</p>
                       </div>
                     </div>
+                    <p className="text-[11px] text-[#5e7368] mt-4 pt-3 border-t border-slate-100 italic">
+                      * Nota de transparencia: Este cálculo representa una simulación matemática ilustrativa. Los ingresos no están garantizados y dependen de las ventas efectivas y del esfuerzo individual de cada afiliado.
+                    </p>
                   </div>
 
                   {/* Unified CTA */}
-                  <div className="pt-2">
+                  <div className="pt-2 flex flex-col sm:flex-row gap-3">
                     <a
                       href={PRE_REGISTRATION_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn-primary-emerald btn-primary-pulse text-sm py-4 w-full flex items-center justify-center gap-2"
+                      className="btn-primary-emerald btn-primary-pulse text-sm py-4 flex-1 flex items-center justify-center gap-2"
                     >
                       <Sparkles className="w-4 h-4" />
-                      <span>ASEGURAR MI POSICIÓN AHORA</span>
+                      <span>EVALUAR OPORTUNIDAD EN VIVO</span>
                       <ArrowRight className="w-4 h-4" />
                     </a>
+                    <button
+                      onClick={() => handleOpenLegal('afiliacion')}
+                      className="px-5 py-4 rounded-full border border-emerald-300 bg-white text-[#093725] hover:bg-emerald-50 text-xs font-bold transition-colors"
+                    >
+                      Ver Descargo de Ingresos
+                    </button>
                   </div>
                 </div>
 
@@ -182,17 +215,17 @@ export function App() {
                             <img src="/images/johnny.png" alt="Johnny" className="w-full h-full object-cover" />
                           </div>
                           <div>
-                            <p className="text-xs uppercase tracking-[0.24em] text-emerald-600 font-bold">Líder y Mentor de Equipo</p>
+                            <p className="text-xs uppercase tracking-[0.24em] text-emerald-600 font-bold">Asesor y Afiliado Independiente</p>
                             <h3 className="text-3xl font-black text-[#093725]">Johnny</h3>
-                            <p className="text-sm text-[#5e7368] mt-1">Acompañamiento directo en tu crecimiento</p>
+                            <p className="text-sm text-[#5e7368] mt-1">Orientación y acompañamiento personalizado</p>
                           </div>
                         </div>
                       </div>
 
                       <div className="rounded-3xl bg-[#ecfdf5] border border-emerald-100 p-5 text-[#093725]">
-                        <p className="text-xs uppercase tracking-[0.24em] text-emerald-600 font-bold">Acción clave</p>
+                        <p className="text-xs uppercase tracking-[0.24em] text-emerald-600 font-bold">Transparencia comercial</p>
                         <p className="mt-3 text-sm leading-relaxed">
-                          Asegura tu posición en la matriz, accede a las capacitaciones del equipo y aprovecha los productos a precio de fábrica para ti y tu familia.
+                          La afiliación es opcional con cuota única de $40 USD. La membresía es de $9.95 USD/mes para acceder a descuentos en productos de bienestar de primera línea sin compras forzadas.
                         </p>
                       </div>
                     </div>
@@ -210,7 +243,7 @@ export function App() {
           </div>
         )}
 
-        {/* Tab 4: MIEMBROS (Fallback / Deep Link) */}
+        {/* Tab 4: MIEMBROS (Deep Link) */}
         {activeTab === 'miembros' && (
           <div className="animate-fade-in pt-4">
             <MembersSection onContactJohnny={handleContactJohnny} />
@@ -219,18 +252,109 @@ export function App() {
 
       </main>
 
-      {/* Footer with bottom padding so floating navigation never covers copyright/links */}
-      <footer className="bg-[#06261a] text-slate-400 py-10 pb-28 sm:pb-24 px-4 sm:px-6 lg:px-8 border-t border-emerald-950 mt-12">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-2 text-white font-extrabold text-xl">
-            <span className="text-emerald-400">LIVE</span>GOOD
-            <span className="text-xs font-normal text-slate-400">| Equipo Johnny (+51 900292484)</span>
+      {/* Footer with Comprehensive Links and Meta Compliance Disclaimers */}
+      <footer className="bg-[#06261a] text-slate-400 py-12 pb-32 sm:pb-28 px-4 sm:px-6 lg:px-8 border-t border-emerald-950 mt-12">
+        <div className="max-w-7xl mx-auto space-y-8">
+          
+          {/* Top Footer Row: Brand + Legal Navigation Links */}
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 pb-8 border-b border-emerald-900/60">
+            <div>
+              <div className="flex items-center gap-2 text-white font-extrabold text-xl">
+                <span className="text-emerald-400">LIVE</span>GOOD
+                <span className="text-xs font-normal text-slate-300">| Afiliado Independiente: Johnny</span>
+              </div>
+              <p className="text-xs text-slate-400 mt-1">
+                Catálogo de bienestar, condiciones de membresía e información comercial clara.
+              </p>
+            </div>
+
+            {/* Legal Links required by Meta Advertising Policies */}
+            <nav aria-label="Enlaces legales y de transparencia" className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-semibold text-emerald-300">
+              <button
+                onClick={() => handleOpenLegal('privacidad')}
+                className="hover:text-white hover:underline transition-colors"
+              >
+                Política de Privacidad
+              </button>
+              <button
+                onClick={() => handleOpenLegal('terminos')}
+                className="hover:text-white hover:underline transition-colors"
+              >
+                Términos y Condiciones
+              </button>
+              <button
+                onClick={() => handleOpenLegal('condiciones')}
+                className="hover:text-white hover:underline transition-colors"
+              >
+                Condiciones de Membresía y Cancelación
+              </button>
+              <button
+                onClick={() => handleOpenLegal('afiliacion')}
+                className="hover:text-white hover:underline transition-colors"
+              >
+                Programa de Afiliación
+              </button>
+              <button
+                onClick={() => handleOpenLegal('contacto')}
+                className="hover:text-white hover:underline transition-colors"
+              >
+                Contacto y Soporte
+              </button>
+            </nav>
           </div>
 
-          <div className="text-xs text-center md:text-right text-slate-400 space-y-1">
-            <p>© {new Date().getFullYear()} Johnnylivegood.com - Todos los derechos reservados.</p>
-            <p className="text-slate-500">Membresía Inteligente a Precio de Fábrica · Soporte directo por WhatsApp.</p>
+          {/* Compliance Disclaimers Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-[11px] leading-relaxed text-slate-400">
+            
+            {/* Meta / Facebook Advertising Disclaimer */}
+            <div className="space-y-1.5">
+              <p className="font-bold text-slate-200 uppercase tracking-wider text-[10px]">
+                Descargo sobre Meta / Facebook
+              </p>
+              <p>
+                Este sitio web no forma parte del sitio web de Meta Platforms, Inc. o Facebook. Asimismo, este sitio NO está respaldado, patrocinado ni administrado por Meta Platforms, Inc. FACEBOOK y META son marcas registradas de Meta Platforms, Inc.
+              </p>
+            </div>
+
+            {/* Income & Results Disclaimer */}
+            <div className="space-y-1.5">
+              <p className="font-bold text-slate-200 uppercase tracking-wider text-[10px]">
+                Descargo de Responsabilidad de Ingresos
+              </p>
+              <p>
+                Cualquier ejemplo o proyección de ingresos en este sitio web es ilustrativo y se basa en el plan de compensación oficial. No representa una promesa ni garantía de ingresos. Los resultados dependen exclusivamente del tiempo, ventas comerciales y esfuerzo individual de cada afiliado independiente.
+              </p>
+            </div>
+
+            {/* Commercial Transparency & Cancellation */}
+            <div className="space-y-1.5">
+              <p className="font-bold text-slate-200 uppercase tracking-wider text-[10px]">
+                Membresía, Cuotas y Cancelación
+              </p>
+              <p>
+                Membresía mensual: $9.95 USD/mes. Cuota de activación de afiliado (opcional): $40 USD pago único. Cero compras mensuales forzadas. Cancelación libre en cualquier momento sin penalizaciones. Garantía de reembolso de 90 días en envases vacíos de productos de bienestar.
+              </p>
+            </div>
+
           </div>
+
+          {/* Bottom Copyright & Contact details */}
+          <div className="pt-6 border-t border-emerald-950 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+            <p>
+              © {new Date().getFullYear()} Johnnylivegood.com - Sitio Informativo de Afiliado Independiente. Todos los derechos reservados.
+            </p>
+            <div className="flex items-center gap-4">
+              <span>WhatsApp: +51 900292484</span>
+              <span>•</span>
+              <button
+                onClick={() => handleOpenLegal('contacto')}
+                className="text-emerald-400 hover:underline"
+              >
+                Canales de Atención
+              </button>
+            </div>
+          </div>
+
         </div>
       </footer>
 
@@ -248,6 +372,14 @@ export function App() {
         isOpen={isCalculatorOpen}
         onClose={() => setIsCalculatorOpen(false)}
         onRegisterClick={handleRegisterClick}
+      />
+
+      {/* Legal & Commercial Transparency Modal */}
+      <LegalModal
+        isOpen={isLegalModalOpen}
+        initialTab={legalModalTab}
+        onClose={() => setIsLegalModalOpen(false)}
+        onContactJohnny={handleContactJohnny}
       />
 
       {/* Floating WhatsApp Widget */}

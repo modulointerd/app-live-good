@@ -160,15 +160,20 @@ export const IncomeCalculatorModal: React.FC<IncomeCalculatorProps> = ({
         </div>
 
         {/* Investment ROI Highlight */}
-        <div className="bg-amber-50 rounded-xl p-3 border border-amber-200 text-xs text-amber-900 flex items-center gap-2 mb-6 font-medium">
+        <div className="bg-amber-50 rounded-xl p-3 border border-amber-200 text-xs text-amber-900 flex items-center gap-2 mb-4 font-medium">
           <Award className="w-5 h-5 text-amber-600 flex-shrink-0" />
           <span>
             {directReferrals >= 2 ? (
-              <strong className="text-amber-800 font-bold">¡RECUPERACIÓN TOTAL! Con solo 2 referidos recuperas los $40 de tu membresía y el resto es ganancia neta.</strong>
+              <strong className="text-amber-800 font-bold">Ejemplo ilustrativo: Con 2 afiliados directos que activen su membresía, el bono de inicio rápido suma $50 USD según el plan de compensación.</strong>
             ) : (
-              <span>Con solo 2 personas directas recuperas el 100% de tu inversión inicial de $40 USD.</span>
+              <span>Por cada afiliado directo registrado se genera una comisión de inicio rápido de $25 USD.</span>
             )}
           </span>
+        </div>
+
+        {/* Legal income disclaimer */}
+        <div className="bg-slate-50 rounded-xl p-3 border border-slate-200 text-[11px] text-slate-500 mb-6 leading-relaxed">
+          * <strong>Aviso legal:</strong> Esta calculadora es una herramienta de simulación matemática basada en las reglas del plan de compensación de LiveGood. No garantiza ningún nivel de ingresos ni resultados económicos. Los resultados dependen del esfuerzo individual, tiempo y ventas comerciales reales.
         </div>
 
         {/* CTA */}

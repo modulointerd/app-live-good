@@ -1,14 +1,15 @@
 import React from 'react';
-import { Shield, MessageCircle, CheckCircle2, Sparkles, ArrowRight } from 'lucide-react';
+import { Shield, MessageCircle, CheckCircle2, Sparkles, ArrowRight, FileText } from 'lucide-react';
 
 interface HeroProps {
   onContactJohnny: () => void;
   onRegisterClick?: () => void;
+  onOpenConditions?: () => void;
 }
 
 const PRE_REGISTRATION_URL = 'https://livegoodtour.com/JILSZO';
 
-export const Hero: React.FC<HeroProps> = ({ onContactJohnny }) => {
+export const Hero: React.FC<HeroProps> = ({ onContactJohnny, onOpenConditions }) => {
   return (
     <section className="relative pt-6 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden">
       
@@ -27,47 +28,70 @@ export const Hero: React.FC<HeroProps> = ({ onContactJohnny }) => {
             <span>+2 MILLONES DE MIEMBROS ACTIVOS</span>
           </div>
 
-          {/* Main Headline — Maleta 1: Claridad */}
+          {/* Main Headline — Neutral y Transparente conforme a Políticas Publicitarias de Meta */}
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#093725] tracking-tight leading-[1.15] font-sans">
-            El modelo de membresía que te permite generar{' '}
+            Conoce LiveGood:{' '}
             <span className="text-[#0fa968] relative inline-block">
-              ingresos recurrentes
+              productos de bienestar
               <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#0fa968]/30" viewBox="0 0 100 20" preserveAspectRatio="none">
                 <path d="M0,15 Q50,0 100,15" fill="none" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
               </svg>
             </span>{' '}
-            con productos a precio de costo.
+            y una oportunidad de afiliación
           </h1>
 
           {/* Subtitle */}
-          <p className="text-base sm:text-lg text-[#4a5d53] font-medium max-w-xl leading-relaxed">
-            Únete a más de 2 millones de miembros que <strong className="text-[#093725] font-bold">ahorran en salud y construyen un ingreso extra desde casa.</strong> Sin compras mensuales obligatorias.
+          <p className="text-base sm:text-lg text-[#1e342a] font-semibold max-w-xl leading-relaxed">
+            Explora el catálogo de productos de bienestar, consulta las condiciones de la membresía y conoce cómo funciona el programa de afiliación.
           </p>
 
-          {/* Mechanism Badge — Maleta 6: Identidad */}
+          {/* Explanatory context paragraph */}
+          <p className="text-sm sm:text-base text-[#4a5d53] font-medium max-w-xl leading-relaxed">
+            Tanto si te interesan los productos como si deseas conocer el modelo de afiliación, aquí encontrarás información para evaluar tus opciones antes de tomar una decisión.
+          </p>
+
+          {/* Mechanism Badge */}
           <div className="pt-1">
             <span className="badge-comisiones flex items-center gap-1.5 shadow-sm">
               <Shield className="w-4 h-4 text-emerald-600" />
-              Membresía Inteligente · Estilo Costco
+              Club de Membresía de Bienestar · Sin compras obligatorias
             </span>
           </div>
 
-          {/* CTA Button — Unified Primary CTA */}
-          <div className="pt-2">
+          {/* CTA Buttons */}
+          <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
             <a
               href={PRE_REGISTRATION_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary-emerald btn-primary-pulse group"
+              className="btn-primary-emerald btn-primary-pulse group flex items-center justify-center gap-2"
             >
               <span className="bg-white/20 p-1 rounded-full group-hover:rotate-12 transition-transform">
                 <ArrowRight className="w-5 h-5 text-white" />
               </span>
-              <span>ASEGURAR MI POSICIÓN AHORA</span>
+              <span>CONOCER MÁS / REGISTRARME</span>
             </a>
+
+            {onOpenConditions ? (
+              <button
+                onClick={onOpenConditions}
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full border border-emerald-300 bg-white/80 hover:bg-emerald-50 text-[#093725] text-xs sm:text-sm font-bold transition-colors shadow-sm"
+              >
+                <FileText className="w-4 h-4 text-emerald-600" />
+                <span>Ver condiciones y costos</span>
+              </button>
+            ) : (
+              <a
+                href="#condiciones-membresia"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full border border-emerald-300 bg-white/80 hover:bg-emerald-50 text-[#093725] text-xs sm:text-sm font-bold transition-colors shadow-sm"
+              >
+                <FileText className="w-4 h-4 text-emerald-600" />
+                <span>Ver condiciones y costos</span>
+              </a>
+            )}
           </div>
 
-          {/* Certainty Microcopy — Maleta 3 */}
+          {/* Certainty Microcopy */}
           <div className="certainty-badges">
             <span className="certainty-badge">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
@@ -75,7 +99,7 @@ export const Hero: React.FC<HeroProps> = ({ onContactJohnny }) => {
             </span>
             <span className="certainty-badge">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-              Transparencia total en pagos
+              Transparencia en precios y cuotas
             </span>
             <span className="certainty-badge">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
@@ -84,14 +108,18 @@ export const Hero: React.FC<HeroProps> = ({ onContactJohnny }) => {
           </div>
 
           {/* Social Proof Quick Stats */}
-          <div className="pt-2 flex items-center gap-6 text-xs sm:text-sm font-semibold text-[#5e7368]">
+          <div className="pt-2 flex flex-wrap items-center gap-4 sm:gap-6 text-xs sm:text-sm font-semibold text-[#5e7368]">
             <div className="flex items-center gap-1.5">
               <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-              <span>Inversión única de $40 USD</span>
+              <span>Membresía $9.95 USD/mes</span>
             </div>
             <div className="flex items-center gap-1.5">
               <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-              <span>190+ países disponibles</span>
+              <span>Afiliación $40 USD (opcional)</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+              <span>Disponible en 190+ países</span>
             </div>
           </div>
         </div>
@@ -127,7 +155,7 @@ export const Hero: React.FC<HeroProps> = ({ onContactJohnny }) => {
                 
                 <div className="mt-1 inline-flex items-center gap-1.5 bg-emerald-50 text-[#0fa968] text-[11px] font-extrabold px-2.5 py-1 rounded-md uppercase tracking-wider border border-emerald-200/60">
                   <Sparkles className="w-3 h-3 text-emerald-600" />
-                  <span>TU MENTOR · LIVEGOOD</span>
+                  <span>ASESOR · AFILIADO INDEPENDIENTE</span>
                 </div>
               </div>
             </div>
@@ -135,23 +163,23 @@ export const Hero: React.FC<HeroProps> = ({ onContactJohnny }) => {
             {/* Personal Statement */}
             <div className="mt-5 bg-slate-50/80 rounded-2xl p-4 border border-slate-100">
               <p className="text-xs sm:text-sm text-[#3a4d43] leading-relaxed font-medium">
-                "Entré a <strong className="text-[#093725]">LiveGood con $40</strong>. Hoy es mi fuente principal de ingresos. Te enseño exactamente cómo lo hice, paso a paso."
+                "En <strong className="text-[#093725]">LiveGood</strong> encontré una forma accesible de consumir productos de bienestar con descuento directo y desarrollar un proyecto de afiliación independiente. Te brindo información objetiva para evaluar tus opciones."
               </p>
             </div>
 
-            {/* Team Support Bullets — Maleta 3: Certeza */}
+            {/* Team Support Bullets */}
             <div className="mt-4 space-y-2">
               <div className="flex items-center gap-2 text-xs text-[#3a4d43] font-semibold">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />
-                <span>Capacitaciones semanales en vivo</span>
+                <span>Capacitaciones semanales y orientación continua</span>
               </div>
               <div className="flex items-center gap-2 text-xs text-[#3a4d43] font-semibold">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />
-                <span>Embudos de captación listos para usar</span>
+                <span>Recursos y herramientas de difusión claras</span>
               </div>
               <div className="flex items-center gap-2 text-xs text-[#3a4d43] font-semibold">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />
-                <span>Acompañamiento paso a paso personalizado</span>
+                <span>Acompañamiento personalizado por WhatsApp</span>
               </div>
             </div>
 

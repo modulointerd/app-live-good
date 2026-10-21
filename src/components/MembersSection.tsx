@@ -78,7 +78,7 @@ export const MembersSection: React.FC<MembersProps> = ({ onContactJohnny }) => {
             </a>
 
             <p className="text-center text-[11px] text-[#5e7368] mt-3 font-medium">
-              🔒 Inclusión oficial en la línea directa de Johnny · Inversión única $40 USD
+              🔒 Registro oficial · Membresía $9.95/mes · Afiliación $40 USD (opcional) · Sin permanencia
             </p>
           </div>
 
