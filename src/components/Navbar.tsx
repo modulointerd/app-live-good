@@ -1,8 +1,8 @@
 import React from 'react';
-import { ShieldCheck, Sparkles, FileText } from 'lucide-react';
+import { ShieldCheck, Download, FileText } from 'lucide-react';
 import { type LegalTab } from './LegalModal';
 
-const PRE_REGISTRATION_URL = 'https://livegoodtour.com/JILSZO';
+const CATALOG_URL = 'https://drive.google.com/file/d/1l1bezloTk1p5Ru1yUzJFtUU3lsBj6MUM/view?usp=sharing';
 
 interface NavbarProps {
   onOpenCalculator?: () => void;
@@ -46,13 +46,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenLegal }) => {
           </div>
 
           <a
-            href={PRE_REGISTRATION_URL}
+            href={CATALOG_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-xs sm:text-sm font-extrabold text-white bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-full shadow-md hover:shadow-lg transition-all active:scale-95"
           >
-            <Sparkles className="w-4 h-4" />
-            <span>ASEGURAR MI LUGAR</span>
+            <Download className="w-4 h-4" />
+            <span>DESCARGAR CATÁLOGO</span>
           </a>
         </div>
       </div>
