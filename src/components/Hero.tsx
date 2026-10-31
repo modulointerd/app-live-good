@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, MessageCircle, CheckCircle2, Sparkles, ArrowRight, FileText } from 'lucide-react';
+import { CheckCircle2, Sparkles, ArrowRight, FileText, Activity, ExternalLink, MessageCircle } from 'lucide-react';
 
 interface HeroProps {
   onContactJohnny: () => void;
@@ -17,16 +17,63 @@ export const Hero: React.FC<HeroProps> = ({ onContactJohnny, onOpenConditions })
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-100/50 rounded-full filter blur-3xl -z-10 pointer-events-none"></div>
       <div className="absolute top-1/3 right-10 w-80 h-80 bg-teal-100/40 rounded-full filter blur-3xl -z-10 pointer-events-none"></div>
 
+      {/* Top Banner Row: Active Members Badge (Left) + 2 Quick Action Buttons (Right, matching user screenshot) */}
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-6 animate-fade-in">
+        {/* Active Members Badge */}
+        <div className="badge-active-members self-start">
+          <span className="badge-pulse-dot"></span>
+          <span>+2 MILLONES DE MIEMBROS ACTIVOS</span>
+        </div>
+
+        {/* Action Buttons: Evaluación Personalizada + LiveGood Clinic */}
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          {/* Botón 1: Evaluación Personalizada */}
+          <a
+            href="https://www.myfreehealthreport.com/JILSZO"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center justify-between gap-3 px-3.5 py-2.5 rounded-2xl bg-white hover:bg-emerald-50/70 border border-emerald-300/80 hover:border-emerald-500 text-left transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5"
+          >
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center flex-shrink-0 group-hover:scale-105 group-hover:bg-emerald-600 group-hover:text-white transition-all">
+                <Activity className="w-4 h-4" />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-xs font-bold text-[#093725] leading-tight">
+                  Desbloquea tu evaluación personalizada
+                </span>
+                <span className="text-[11px] font-medium text-emerald-700 leading-tight">
+                  Es gratis y podría cambiar tu vida.
+                </span>
+              </div>
+            </div>
+            <ExternalLink className="w-3.5 h-3.5 text-emerald-600/70 group-hover:text-emerald-700 group-hover:translate-x-0.5 transition-all flex-shrink-0" />
+          </a>
+
+          {/* Botón 2: LiveGood Clinic */}
+          <a
+            href="https://www.LiveGoodClinic.com/JILSZO"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center justify-between gap-3 px-3.5 py-2.5 rounded-2xl bg-white hover:bg-emerald-50/70 border border-emerald-300/80 hover:border-emerald-500 text-left transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5"
+          >
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center flex-shrink-0 group-hover:scale-105 group-hover:bg-emerald-600 group-hover:text-white transition-all">
+                <Sparkles className="w-4 h-4" />
+              </div>
+              <span className="text-xs font-bold text-[#093725] leading-tight">
+                Impulsa tu camino hacia el bienestar.
+              </span>
+            </div>
+            <ExternalLink className="w-3.5 h-3.5 text-emerald-600/70 group-hover:text-emerald-700 group-hover:translate-x-0.5 transition-all flex-shrink-0" />
+          </a>
+        </div>
+      </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
         
         {/* Left Column - Main Copy & CTA */}
         <div className="lg:col-span-7 flex flex-col items-start space-y-6">
-          
-          {/* Active Members Badge */}
-          <div className="badge-active-members animate-fade-in">
-            <span className="badge-pulse-dot"></span>
-            <span>+2 MILLONES DE MIEMBROS ACTIVOS</span>
-          </div>
 
           {/* Main Headline — Neutral y Transparente conforme a Políticas Publicitarias de Meta */}
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#093725] tracking-tight leading-[1.15] font-sans">
@@ -44,19 +91,6 @@ export const Hero: React.FC<HeroProps> = ({ onContactJohnny, onOpenConditions })
           <p className="text-base sm:text-lg text-[#1e342a] font-semibold max-w-xl leading-relaxed">
             Explora el catálogo de productos de bienestar, consulta las condiciones de la membresía y conoce cómo funciona el programa de afiliación.
           </p>
-
-          {/* Explanatory context paragraph */}
-          <p className="text-sm sm:text-base text-[#4a5d53] font-medium max-w-xl leading-relaxed">
-            Tanto si te interesan los productos como si deseas conocer el modelo de afiliación, aquí encontrarás información para evaluar tus opciones antes de tomar una decisión.
-          </p>
-
-          {/* Mechanism Badge */}
-          <div className="pt-1">
-            <span className="badge-comisiones flex items-center gap-1.5 shadow-sm">
-              <Shield className="w-4 h-4 text-emerald-600" />
-              Club de Membresía de Bienestar · Sin compras obligatorias
-            </span>
-          </div>
 
           {/* CTA Buttons */}
           <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">

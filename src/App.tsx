@@ -259,11 +259,17 @@ export function App() {
           {/* Top Footer Row: Brand + Legal Navigation Links */}
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 pb-8 border-b border-emerald-900/60">
             <div>
-              <div className="flex items-center gap-2 text-white font-extrabold text-xl">
-                <span className="text-emerald-400">LIVE</span>GOOD
-                <span className="text-xs font-normal text-slate-300">| Afiliado Independiente: Johnny</span>
+              <div className="flex items-center gap-3">
+                <img
+                  src="/images/livegood-logo-light.png"
+                  alt="LiveGood"
+                  className="h-7 sm:h-8 w-auto object-contain"
+                />
+                <span className="text-xs font-semibold text-slate-300 pl-3 border-l border-emerald-800">
+                  Afiliado Independiente: Johnny
+                </span>
               </div>
-              <p className="text-xs text-slate-400 mt-1">
+              <p className="text-xs text-slate-400 mt-2">
                 Catálogo de bienestar, condiciones de membresía e información comercial clara.
               </p>
             </div>
