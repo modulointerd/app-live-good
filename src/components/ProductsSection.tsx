@@ -6,7 +6,7 @@ interface ProductsProps {
 }
 
 const STORE_URL = 'https://www.LiveGood.com/JILSZO';
-const CATALOG_URL = 'https://drive.google.com/file/d/1l1bezloTk1p5Ru1yUzJFtUU3lsBj6MUM/view?usp=sharing';
+const CATALOG_URL = 'https://drive.google.com/file/d/1KGsd9-1-XxLWdkWDu7HppS7myG4EIBJX/view?usp=sharing';
 const PRODUCT_VIDEO_URL = 'https://www.youtube-nocookie.com/embed/l4lycwQRqmE?autoplay=0&rel=0';
 const WHATSAPP_URL = `https://wa.me/51900292484?text=${encodeURIComponent(
   'Hola Johnny, acabo de ver tu página y me interesa saber cómo funciona el club de membresía y cómo puedo generar ingresos con tu equipo. ¿Me das más detalles?'
@@ -21,7 +21,11 @@ export const ProductsSection: React.FC<ProductsProps> = () => {
       <div className="rounded-[2rem] overflow-hidden bg-gradient-to-r from-[#0f5d3e] to-[#093725] p-8 text-white shadow-2xl mb-10">
         <div className="max-w-4xl mx-auto grid gap-6 text-center">
           <div className="flex flex-col items-center gap-4">
-            <div className="text-3xl sm:text-4xl font-black tracking-tight">LIVE GOOD</div>
+            <img
+              src="/images/livegood-logo-light.png"
+              alt="LiveGood"
+              className="h-9 sm:h-11 w-auto object-contain mx-auto"
+            />
             <div className="w-28 h-28 rounded-full overflow-hidden ring-4 ring-white shadow-lg">
               <img src="/images/johnny.png" alt="Johnny" className="w-full h-full object-cover" />
             </div>

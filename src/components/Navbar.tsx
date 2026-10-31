@@ -2,7 +2,7 @@ import React from 'react';
 import { Download, FileText } from 'lucide-react';
 import { type LegalTab } from './LegalModal';
 
-const CATALOG_URL = 'https://drive.google.com/file/d/1l1bezloTk1p5Ru1yUzJFtUU3lsBj6MUM/view?usp=sharing';
+const CATALOG_URL = 'https://drive.google.com/file/d/1KGsd9-1-XxLWdkWDu7HppS7myG4EIBJX/view?usp=sharing';
 
 interface NavbarProps {
   onOpenCalculator?: () => void;
