@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Shield, Sparkles, ArrowRight } from 'lucide-react';
+import { Analytics } from '@vercel/analytics/react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Testimonials } from './components/Testimonials';
@@ -39,6 +40,7 @@ export function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#f8faf9] text-[#121e19]">
+      <Analytics />
       
       {/* Top Transparency Banner */}
       <div className="urgency-banner !bg-[#06261a] !border-emerald-800/60">
